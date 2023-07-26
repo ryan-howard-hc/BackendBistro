@@ -15,12 +15,8 @@
         - Id (IntegerField)
     - Cuisine:
         - Id (Integerfield)
-2. CRUD for Menu Items
-    - Create a new menu item
-    - Read menu item details
-    - Update item details
-    - Delete items
-3. Views
+
+2. Views
     - 
 `
 ## Should haves
@@ -33,4 +29,64 @@
 1. Search
 2. Filter
 3. 
+`
+
+
+## CRUD
+`
+1. Create new menu items
+    - Request data from JSON: title, description, price, spiciness, category, cuisine details
+
+2. Read menu items
+
+3. Update menu items
+
+4. Delete menu items
+`
+
+## INIT
+## Models.py
+`
+class MenuItem(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    spicy_level = models.IntegerField()
+    category = models.ForeignKey
+    cuisine = models.ForeignKey
+
+    def __str__(self):
+        return self.title
+`
+## views.py
+
+"Views in Django are Python functions or classes that handle incoming HTTP requests and return HTTP responses."
+`
+from django.http import JsonResponse
+from .models import MenuItem
+
+def full_menu(request):
+    menu = MenuItem.objects.all()
+    data = []
+    for item in menu:
+        data.append({
+            'id':item.id,
+            'title':item.title,
+            'description':item.description,
+            'price': item.price,
+            'spicy_level': item.spicy_level,
+            'category': item.category.name,
+            'cuisine': item.cuisine.name,            
+        })
+    return JsonResponse(data)
+`
+
+## urls.py
+`
+from django.urls import path
+from .views import full_menu
+
+urlpatterns = [
+    path('/menu-items/', full_menu, name = 'full_menu'),
+]
 `
