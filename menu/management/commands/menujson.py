@@ -8,15 +8,19 @@ class Command(BaseCommand):
     help = 'Import JSON data into the MenuItem table'
 
     def handle(self, *args, **kwargs):
-        json_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'menu.json')
+        print(f"Current working directory: {os.getcwd()}")
+        json_file = 'menu.json'
+        json_file_path = os.path.abspath(json_file)
+        print(f"JSON file path: {json_file_path}")
         with open(json_file, 'r') as file:
             data = json.load(file)
-            for item in data:
+            for item in data["menuItems"]:
                 MenuItem.objects.create(
-                    title=item['title'],
+                    id=item['id'],
+                    title=item['name'],
                     description=item['description'],
-                    price=item['price'],
+                    price=float(item['price'].replace('$', '')),
                     spicy_level=item['spicy_level'],
-                )
+        )
         self.stdout.write(self.style.SUCCESS('Successfully imported JSON data into the table.'))
 

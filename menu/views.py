@@ -1,10 +1,22 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .models import MenuItem
-# Create your views here.
-def index(request):
-    return HttpResponse("skrrt")
 
 def get_table(request):
     getit = list(MenuItem.objects.values())
-    return JsonResponse({'data':getit})
+    return JsonResponse({'data': getit})
+
+def get_menu(request):
+    menu_items = MenuItem.objects.select_related('category', 'cuisine').all()
+    data = []
+
+    for item in menu_items:
+        data.append({
+            'title': item.title,
+            'description': item.description,
+            'price': float(item.price), 
+            'spicy_level': item.spicy_level,
+            'category': item.category.name,
+            'cuisine': item.cuisine.name, 
+        })
+
+    return JsonResponse(data, safe=False)

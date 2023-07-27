@@ -22,7 +22,8 @@
 ## Should haves
 `
 1. Testing - Tests for models and views?
-2. Error Messaging
+2. Error Messaging - Handle backend errors and provide error messaging
+3. 
 `
 ## Could haves
 `
@@ -58,6 +59,7 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.title
 `
+
 ## views.py
 
 "Views in Django are Python functions or classes that handle incoming HTTP requests and return HTTP responses."

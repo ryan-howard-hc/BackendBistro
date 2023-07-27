@@ -1,0 +1,63 @@
+Assuming that the gameplay is already in place to run, design a class representing a single piece in a game of tetris
+as well as any other classes you might need to play a game of tetris
+
+Given: tetramino - specific shape that can rotate around - J , L, backwards L , Z , backwards Z, square, 
+
+Looking for class structure/design patterns
+Data Structures
+
+Stretch: Code for the actions
+
+
+AS a user, see a shape that I can move
+
+class shape
+    create variables for a simple shape
+    create functions for each shaped that is produced
+    create a nested function for rotation of each shape within each shape function
+
+    variables for each orientation
+    upright = 0
+    left = 270
+    right = 90
+    down = 180
+
+    userleft = -90
+    userright = +90
+
+        while j is upright 
+            if user presses userright, would add 90 to reorient object to a different set position dictated by an object made prior
+
+if 0, return to 270, rather than negative
+
+Want to create a classname for each individual block
+Want to be able to define how it can rotate and orient according to both the board as well as orient to the other blocks placed on the board - stretch
+
+Want to be able to make the class/shape be able to rotate for the player
+I would like to be able to define my shapes using a grid, and 'blacking out' any piece of said grid to make it transparent/void in the context of the board/other pieces
+
+Example like having a square as the first block |               for an L block
+                                                | 
+                                                | | 
+                                        
+                                                | |
+                                                | |             for a square block
+
+
+
+The best course of action would to be able to create probably an if else to define the orientation and rotation for each direction
+    if else being if it is upright, I would want to be able to rotate it left 90 degrees and right 90 degrees
+    else if it is rotated left 90 degrees for example, i would want to be able to have it recognize this, and be able to rotate it in a similar fashion but to upright orientation or upside down
+
+
+
+    probabyl would want to add a break towards the end for when the piece hits the another block or the bottom of the playscreen
+    and/ Or a boolean to define whether it stops true or false while it is in progress
+
+    
+
+
+
+class for each shape/object
+class for the board and grid
+class for how each line is defined with each square of the grids used
